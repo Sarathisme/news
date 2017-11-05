@@ -1,4 +1,4 @@
-package com.example.sarat.news.fragments;
+package com.dev.sarat.news.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,26 +11,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.example.sarat.news.News;
-import com.example.sarat.news.NewsAdapter;
-import com.example.sarat.news.NewsApiData;
-import com.example.sarat.news.NewsLoader;
-import com.example.sarat.news.R;
+import com.dev.sarat.news.News;
+import com.dev.sarat.news.NewsAdapter;
+import com.dev.sarat.news.NewsLoader;
+import com.dev.sarat.news.R;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class General extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>> {
+public class TOI extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>> {
 
     private NewsAdapter adapter;
 
     private ProgressBar progressBar;
 
-    public General(){
+    public TOI(){
 
     }
 
@@ -51,7 +49,6 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
             public void onTick(long millisUntilFinished) {}
         }.start();
-
 
         return fragmentView;
     }
@@ -83,7 +80,7 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), NewsApiData.SOURCE);
+        return new NewsLoader(getContext(), "the-times-of-india,the-hindu");
     }
 
     @Override
@@ -94,7 +91,7 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
     @Override
     public void onLoaderReset(android.support.v4.content.Loader<ArrayList<News>> loader) {
-        adapter.addAll(new ArrayList<News>());
         progressBar.setVisibility(View.VISIBLE);
+        adapter.addAll(new ArrayList<News>());
     }
 }

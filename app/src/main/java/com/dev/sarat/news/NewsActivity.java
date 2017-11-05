@@ -1,23 +1,22 @@
-package com.example.sarat.news;
+package com.dev.sarat.news;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class NewsActivity extends AppCompatActivity{
 
@@ -27,6 +26,9 @@ public class NewsActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        if(!isNwConnected(getBaseContext())&&Build.VERSION.SDK_INT<=26)
+            Toast.makeText(getBaseContext(),"Internet not connected!",Toast.LENGTH_LONG).show();
 
         try {
             Window window = this.getWindow();
@@ -54,7 +56,19 @@ public class NewsActivity extends AppCompatActivity{
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Setting message manually and performing action on button click
-        builder.setMessage("Developed by Sarath Sattiraju\nPowered by Newsapi.org")
+        String icon = "<a href='http://www.pixelkit.com'> PixelKit </a>";
+        String message = "Developed by Sarath Sattiraju\nPowered by Newsapi.org\nIcon made by ";
+        String second = "from ";
+        String web =   "<a href='http://www.iconarchive.com'> Icon Archive </a>";
+
+        String whole;
+
+        if(Build.VERSION.SDK_INT<=24)
+            whole = message+ Html.fromHtml(icon)+second+Html.fromHtml(web);
+        else
+            whole = message+ Html.fromHtml(icon,0)+second+Html.fromHtml(web,0);
+
+        builder.setMessage(whole)
                 .setCancelable(false)
                 .setPositiveButton("RATE IT", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -75,10 +89,31 @@ public class NewsActivity extends AppCompatActivity{
 
     public void restartNetwork(View v){
 
-        final Fragment fragment = getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.viewPager+":"+viewPager.getCurrentItem());
-        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+        if(!isNwConnected(getBaseContext()))
+            Toast.makeText(getBaseContext(),"Internet not connected!",Toast.LENGTH_LONG).show();
+        else {
 
-        getSupportFragmentManager().beginTransaction().attach(fragment).commit();
-        Toast.makeText(getBaseContext(),"Loading! Please wait.......",Toast.LENGTH_LONG).show();
+            final Fragment fragment = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.getCurrentItem());
+            getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+
+            getSupportFragmentManager().beginTransaction().attach(fragment).commit();
+            Toast.makeText(getBaseContext(), "Loading! Please wait.......", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static boolean isNwConnected(Context context) {
+        if (context == null) {
+            return true;
+        }
+
+        if(Build.VERSION.SDK_INT<=26) {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nwInfo = connectivityManager.getActiveNetworkInfo();
+            if (nwInfo != null && nwInfo.isConnectedOrConnecting()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

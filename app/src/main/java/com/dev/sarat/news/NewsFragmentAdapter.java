@@ -1,12 +1,12 @@
-package com.example.sarat.news;
+package com.dev.sarat.news;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.sarat.news.fragments.General;
-import com.example.sarat.news.fragments.TOI;
+import com.dev.sarat.news.fragments.General;
+import com.dev.sarat.news.fragments.TOI;
 
 /**
  * Created by sarat on 11/3/2017.

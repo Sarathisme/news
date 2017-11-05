@@ -1,4 +1,4 @@
-package com.example.sarat.news;
+package com.dev.sarat.news;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

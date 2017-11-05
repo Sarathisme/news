@@ -1,4 +1,4 @@
-package com.example.sarat.news;
+package com.dev.sarat.news;
 
 /**
  * Created by sarat on 11/3/2017.

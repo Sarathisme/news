@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context="com.example.sarat.news.NewsActivity">
+    tools:context="com.dev.sarat.news.NewsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

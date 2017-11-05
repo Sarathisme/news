@@ -1,4 +1,4 @@
-package com.example.sarat.news.fragments;
+package com.dev.sarat.news.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,26 +11,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.example.sarat.news.News;
-import com.example.sarat.news.NewsAdapter;
-import com.example.sarat.news.NewsApiData;
-import com.example.sarat.news.NewsLoader;
-import com.example.sarat.news.R;
+import com.dev.sarat.news.News;
+import com.dev.sarat.news.NewsAdapter;
+import com.dev.sarat.news.NewsApiData;
+import com.dev.sarat.news.NewsLoader;
+import com.dev.sarat.news.R;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TOI extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>> {
+public class General extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>> {
 
     private NewsAdapter adapter;
 
     private ProgressBar progressBar;
 
-    public TOI(){
+    public General(){
 
     }
 
@@ -83,7 +82,7 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
 
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), "the-times-of-india,the-hindu");
+        return new NewsLoader(getContext(), NewsApiData.SOURCE);
     }
 
     @Override
@@ -94,7 +93,7 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
 
     @Override
     public void onLoaderReset(android.support.v4.content.Loader<ArrayList<News>> loader) {
-        progressBar.setVisibility(View.VISIBLE);
         adapter.addAll(new ArrayList<News>());
+        progressBar.setVisibility(View.VISIBLE);
     }
 }
