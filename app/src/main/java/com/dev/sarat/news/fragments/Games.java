@@ -1,5 +1,6 @@
 package com.dev.sarat.news.fragments;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,10 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import com.dev.sarat.news.News;
 import com.dev.sarat.news.NewsAdapter;
-import com.dev.sarat.news.NewsApiData;
 import com.dev.sarat.news.NewsLoader;
 import com.dev.sarat.news.R;
 
@@ -23,15 +22,16 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class General extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>> {
+public class Games extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<News>>  {
 
     private NewsAdapter adapter;
 
     private ProgressBar progressBar;
 
-    public General(){
-
+    public Games() {
+        // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +50,6 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
             public void onTick(long millisUntilFinished) {}
         }.start();
-
 
         return fragmentView;
     }
@@ -82,7 +81,7 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), NewsApiData.SOURCE);
+        return new NewsLoader(getContext(), "ign");
     }
 
     @Override
@@ -93,7 +92,7 @@ public class General extends Fragment implements android.support.v4.app.LoaderMa
 
     @Override
     public void onLoaderReset(android.support.v4.content.Loader<ArrayList<News>> loader) {
-        adapter.addAll(new ArrayList<News>());
         progressBar.setVisibility(View.VISIBLE);
+        adapter.addAll(new ArrayList<News>());
     }
 }

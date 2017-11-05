@@ -79,7 +79,7 @@
             android:background="@color/colorPrimary"
             app:tabMode="scrollable"
             app:tabTextColor="#fff"
-            app:tabSelectedTextColor="#fff"
+            app:tabSelectedTextColor="#000"
             android:layout_weight="0.7">
 
         </android.support.design.widget.TabLayout>

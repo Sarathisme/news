@@ -80,7 +80,7 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
 
         ArrayList<News> news = new ArrayList<>();
 
-        Log.v("Restarted again","Yes again!");
+//        Log.v("Restarted again","Yes again!");
 
         try {
             JSONObject object = new JSONObject(JSON_RESPONSE);
@@ -99,7 +99,7 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
                 if(!publishedAt.equals("null")) {
                     String[] publishedArray = publishedAt.split("T");
                     publishedArray[1] = publishedArray[1].substring(0, publishedArray[1].length() - 1);
-                    publishedAt = publishedArray[0] + " " + publishedArray[1];
+                    publishedAt = publishedArray[0] + "    " + publishedArray[1];
                 }
 
                 news.add(new News(author, title, description, url, urlToImage, publishedAt));

@@ -2,8 +2,10 @@ package com.dev.sarat.news;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,9 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class NewsActivity extends AppCompatActivity{
@@ -55,36 +60,55 @@ public class NewsActivity extends AppCompatActivity{
     public void showAlert(View v){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        //Setting message manually and performing action on button click
-        String icon = "<a href='http://www.pixelkit.com'> PixelKit </a>";
-        String message = "Developed by Sarath Sattiraju\nPowered by Newsapi.org\nIcon made by ";
-        String second = "from ";
-        String web =   "<a href='http://www.iconarchive.com'> Icon Archive </a>";
-
-        String whole;
-
-        if(Build.VERSION.SDK_INT<=24)
-            whole = message+ Html.fromHtml(icon)+second+Html.fromHtml(web);
-        else
-            whole = message+ Html.fromHtml(icon,0)+second+Html.fromHtml(web,0);
-
-        builder.setMessage(whole)
-                .setCancelable(false)
-                .setPositiveButton("RATE IT", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getBaseContext(), "Yet to be implemented!", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //  Action for 'NO' Button
-                        dialog.cancel();
-                    }
-                });
+        View alertView = this.getLayoutInflater().inflate(R.layout.alert,null);
+        builder.setView(alertView);
 
         AlertDialog alert = builder.create();
+
+        setCancelButton(alertView,alert);
         alert.setTitle("Info");
         alert.show();
+
+        TextView textView = alertView.findViewById(R.id.newsapi);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Its here","IS HERE");
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("http://www.newsapi.org"));
+                startActivity(i);
+            }
+        });
+
+        TextView textView1 = alertView.findViewById(R.id.pixelkit);
+        textView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("http://www.pixelkit.com"));
+                startActivity(i);
+            }
+        });
+
+        TextView textView2 = alertView.findViewById(R.id.iconarchive);
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("http://www.iconarchive.com"));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void setCancelButton(View view,final AlertDialog alert){
+        Button okButton = view.findViewById(R.id.ok);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
     }
 
     public void restartNetwork(View v){

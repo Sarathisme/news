@@ -5,8 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.dev.sarat.news.fragments.General;
+import com.dev.sarat.news.fragments.Games;
+import com.dev.sarat.news.fragments.Hollywood;
+import com.dev.sarat.news.fragments.Sports;
 import com.dev.sarat.news.fragments.TOI;
+import com.dev.sarat.news.fragments.Tech;
+import com.dev.sarat.news.fragments.World;
 
 /**
  * Created by sarat on 11/3/2017.
@@ -22,19 +26,13 @@ public class NewsFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0: return new TOI();
-            case 1: NewsApiData.SOURCE = "techcrunch";
-                return new General();
-            case 2: NewsApiData.SOURCE = "ign";
-                return new General();
-            case 3: NewsApiData.SOURCE = "bbc-news";
-                return new General();
-            case 4: NewsApiData.SOURCE = "espn";
-                return new General();
-            case 5: NewsApiData.SOURCE = "mtv-news";
-                return new General();
-            default:NewsApiData.SOURCE = "the-times-of-india";
+            case 1: return new Tech();
+            case 2: return new Games();
+            case 3: return new World();
+            case 4: return new Sports();
+            case 5: return new Hollywood();
         }
-        return new General();
+        return new TOI();
     }
 
     @Override
