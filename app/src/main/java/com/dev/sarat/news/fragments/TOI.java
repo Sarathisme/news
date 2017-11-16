@@ -16,6 +16,7 @@ import com.dev.sarat.news.News;
 import com.dev.sarat.news.NewsAdapter;
 import com.dev.sarat.news.NewsLoader;
 import com.dev.sarat.news.R;
+import com.dev.sarat.news.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -53,17 +54,17 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
         return fragmentView;
     }
 
-    public void afterRefresh(View fragmentView){
+    public void afterRefresh(View fragmentView) {
 
         progressBar.setVisibility(View.INVISIBLE);
 
         ListView listView = fragmentView.findViewById(R.id.listView);
 
-        adapter = new NewsAdapter(getContext(),new ArrayList<News>());
+        adapter = new NewsAdapter(getContext(), new ArrayList<News>());
 
         listView.setAdapter(adapter);
 
-        getLoaderManager().initLoader(1,null,this).forceLoad();
+        getLoaderManager().initLoader(1, null, this).forceLoad();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,13 +72,12 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
 
                 News news = adapter.getItem(i);
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news.getUrl()));
+                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("url", news.getUrl());
                 startActivity(intent);
             }
         });
     }
-
-
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
         return new NewsLoader(getContext(), "the-times-of-india,the-hindu");

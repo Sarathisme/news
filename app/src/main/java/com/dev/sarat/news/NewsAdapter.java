@@ -1,6 +1,7 @@
 package com.dev.sarat.news;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -55,6 +56,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
         if(!currentNews.getPublishedAt().equals("null"))
             publishedText=currentNews.getPublishedAt();
         publishedAt.setText(publishedText);
+
+        TextView image = customView.findViewById(R.id.imageNews);
+        image.setBackground(new BitmapDrawable(currentNews.getImage()));
 
 
         return customView;

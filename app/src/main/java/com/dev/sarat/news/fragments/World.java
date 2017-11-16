@@ -18,6 +18,7 @@ import com.dev.sarat.news.News;
 import com.dev.sarat.news.NewsAdapter;
 import com.dev.sarat.news.NewsLoader;
 import com.dev.sarat.news.R;
+import com.dev.sarat.news.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,8 @@ public class World extends Fragment implements android.support.v4.app.LoaderMana
 
                 News news = adapter.getItem(i);
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news.getUrl()));
+                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("url",news.getUrl());
                 startActivity(intent);
             }
         });

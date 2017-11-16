@@ -1,6 +1,8 @@
 package com.dev.sarat.news;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.squareup.okhttp.HttpUrl;
@@ -11,6 +13,10 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -102,12 +108,28 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
                     publishedAt = publishedArray[0] + "    " + publishedArray[1];
                 }
 
-                news.add(new News(author, title, description, url, urlToImage, publishedAt));
+                Bitmap image = getBitmapFromURL(urlToImage);
+
+                news.add(new News(author, title, description, url, urlToImage, publishedAt,image));
             }
         }catch(Exception e){
             e.printStackTrace();
         }
 
         return news;
+    }
+
+    public Bitmap getBitmapFromURL(String imageUrl) {
+        try {
+            URL url = new URL(imageUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
