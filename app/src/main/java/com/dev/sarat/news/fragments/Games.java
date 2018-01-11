@@ -44,20 +44,20 @@ public class Games extends Fragment implements android.support.v4.app.LoaderMana
         progressBar = fragmentView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        new CountDownTimer(2000, 1000) {
+        /* new CountDownTimer(2000, 1000) {
             public void onFinish() {
                 afterRefresh(fragmentView);
             }
 
             public void onTick(long millisUntilFinished) {}
-        }.start();
+        }.start(); */
+
+        afterRefresh(fragmentView);
 
         return fragmentView;
     }
 
     public void afterRefresh(View fragmentView){
-
-        progressBar.setVisibility(View.INVISIBLE);
 
         ListView listView = fragmentView.findViewById(R.id.listView);
 
@@ -66,6 +66,7 @@ public class Games extends Fragment implements android.support.v4.app.LoaderMana
         listView.setAdapter(adapter);
 
         getLoaderManager().initLoader(1,null,this).forceLoad();
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

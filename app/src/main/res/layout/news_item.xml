@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="8dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="4dp">
+        android:layout_margin="12dp">
 
         <RelativeLayout
             android:padding="4dp"
@@ -19,30 +18,35 @@
             android:background="#0000"
             android:layout_height="wrap_content">
 
-            <TextView
+          <ImageView
+                android:contentDescription="@string/dummyText"
                 android:id="@+id/imageNews"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="200dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textColor="#000"
                 android:layout_below="@id/imageNews"
-                tools:text="Sample title"/>
+                android:fontFamily="@font/cabin_semibold"
+                android:padding="4dp"
+                android:textColor="#000"
+                android:textSize="16sp"
+                tools:text="Sample title" />
+
 
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleTextView"
+                android:fontFamily="@font/cabin_semibold"
                 android:padding="4dp"
                 android:textColor="#757575"
                 android:textStyle="bold"
-                tools:text="@string/dummyText"/>
+                tools:text="@string/dummyText" />
 
             <TextView
                 android:id="@+id/authorTextView"

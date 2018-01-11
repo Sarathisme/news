@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -57,9 +60,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
             publishedText=currentNews.getPublishedAt();
         publishedAt.setText(publishedText);
 
-        TextView image = customView.findViewById(R.id.imageNews);
-        image.setBackground(new BitmapDrawable(currentNews.getImage()));
+        ImageView image = customView.findViewById(R.id.imageNews);
+        image.setVisibility(View.VISIBLE);
 
+        Picasso.with(getContext()).load(currentNews.getUrlToImage()).into(image);
 
         return customView;
     }

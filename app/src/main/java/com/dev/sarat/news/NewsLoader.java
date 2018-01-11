@@ -73,8 +73,7 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
             }catch(Exception e){
                 e.printStackTrace();
             }
-
-
+            
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -108,28 +107,12 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
                     publishedAt = publishedArray[0] + "    " + publishedArray[1];
                 }
 
-                Bitmap image = getBitmapFromURL(urlToImage);
-
-                news.add(new News(author, title, description, url, urlToImage, publishedAt,image));
+                news.add(new News(author, title, description, url, urlToImage, publishedAt));
             }
         }catch(Exception e){
             e.printStackTrace();
         }
 
         return news;
-    }
-
-    public Bitmap getBitmapFromURL(String imageUrl) {
-        try {
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            return BitmapFactory.decodeStream(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }
