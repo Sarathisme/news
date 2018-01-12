@@ -4,13 +4,15 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context="com.dev.sarat.news.fragments.General">
+    tools:context="com.dev.sarat.news.fragments.TOI">
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
+        android:padding="4dp"
         android:layout_height="match_parent"
-        android:divider="@null" />
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

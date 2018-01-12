@@ -66,7 +66,7 @@ public class World extends Fragment implements android.support.v4.app.LoaderMana
 
         listView.setAdapter(adapter);
 
-        getLoaderManager().initLoader(1,null,this).forceLoad();
+        getLoaderManager().initLoader(6,null,this).forceLoad();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class World extends Fragment implements android.support.v4.app.LoaderMana
 
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), "bbc-news");
+        return new NewsLoader(getContext(), "bbc-news,abc-news,cnn");
     }
 
     @Override

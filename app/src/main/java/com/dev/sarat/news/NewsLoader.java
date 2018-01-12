@@ -36,29 +36,24 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
     @Override
     public ArrayList<News> loadInBackground() {
 
-        ArrayList<News> newses;
+        ArrayList<News> newses = new ArrayList<>();
 
-        if(source.equals("the-times-of-india,the-hindu")){
-            source = "the-times-of-india";
-            newses = networkCall();
+        String[] sources = source.split(",");
 
-            source = "the-hindu";
-            newses.addAll(networkCall());
-        }else{
-            newses = networkCall();
+        for(int i = 0;i< sources.length;i++){
+            newses.addAll(i,networkCall(sources[i]));
         }
-
         return newses;
     }
 
-    private ArrayList<News> networkCall(){
+    private ArrayList<News> networkCall(String source){
 
         try{
 
             OkHttpClient client = new OkHttpClient();
 
             HttpUrl.Builder urlBuilder = HttpUrl.parse(NewsApiData.URL).newBuilder();
-            urlBuilder.addQueryParameter("source",source);
+            urlBuilder.addQueryParameter("sources",source);
             urlBuilder.addQueryParameter("apiKey",NewsApiData.API_KEY);
 
             String url = urlBuilder.build().toString();
@@ -84,8 +79,6 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<Array
     private ArrayList<News> parseJSONResponse(){
 
         ArrayList<News> news = new ArrayList<>();
-
-//        Log.v("Restarted again","Yes again!");
 
         try {
             JSONObject object = new JSONObject(JSON_RESPONSE);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
@@ -11,5 +12,16 @@
         android:contentDescription="@string/dummyText"
         android:layout_centerInParent="true"
         android:src="@mipmap/px"/>
+
+    <TextView
+        android:id="@+id/developedByText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/wendy_one"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="48sp" />
 
 </RelativeLayout>

@@ -23,7 +23,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_scrollFlags="scroll|enterAlways">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -34,39 +33,10 @@
                     android:layout_height="wrap_content"
                     android:text="News"
                     android:fontFamily="sans-serif-light"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textColor="#fff"/>
-
-                <ImageButton
-                    android:id="@+id/info"
-                    android:contentDescription="Info for developers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="#0000"
-                    android:onClick="showAlert"
-                    android:src="@drawable/ic_info_outline_white_24dp"/>
-
-               <ImageButton
-                    android:contentDescription="Info for developers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/info"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/info"
-                    android:paddingEnd="8dp"
-                    android:paddingRight="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="#0000"
-                    android:onClick="restartNetwork"
-                    android:src="@drawable/ic_refresh_white_24dp"/>
 
             </RelativeLayout>
 
@@ -89,7 +59,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:background="#e0e0e0"
+        android:background="@android:color/white"
         android:layout_height="0dp"
         android:layout_weight="6">
 

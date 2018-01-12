@@ -43,14 +43,6 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
         progressBar = fragmentView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        /* new CountDownTimer(2000, 1000) {
-            public void onFinish() {
-                afterRefresh(fragmentView);
-            }
-
-            public void onTick(long millisUntilFinished) {}
-        }.start(); */
-
         afterRefresh(fragmentView);
 
         return fragmentView;
@@ -64,7 +56,7 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
 
         listView.setAdapter(adapter);
 
-        getLoaderManager().initLoader(1, null, this).forceLoad();
+        getLoaderManager().initLoader(5, null, this).forceLoad();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,7 +72,7 @@ public class TOI extends Fragment implements android.support.v4.app.LoaderManage
     }
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), "the-times-of-india,the-hindu");
+        return new NewsLoader(getContext(), "the-times-of-india,the-hindu,google-news-in");
     }
 
     @Override

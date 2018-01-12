@@ -44,14 +44,6 @@ public class Tech extends Fragment implements android.support.v4.app.LoaderManag
         progressBar = fragmentView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        /* new CountDownTimer(2000, 1000) {
-            public void onFinish() {
-                afterRefresh(fragmentView);
-            }
-
-            public void onTick(long millisUntilFinished) {}
-        }.start(); */
-
         afterRefresh(fragmentView);
 
         return fragmentView;
@@ -65,7 +57,7 @@ public class Tech extends Fragment implements android.support.v4.app.LoaderManag
 
         listView.setAdapter(adapter);
 
-        getLoaderManager().initLoader(1,null,this).forceLoad();
+        getLoaderManager().initLoader(4,null,this).forceLoad();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,7 +75,7 @@ public class Tech extends Fragment implements android.support.v4.app.LoaderManag
 
     @Override
     public android.support.v4.content.Loader<ArrayList<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(getContext(), "techcrunch");
+        return new NewsLoader(getContext(), "techcrunch,engadget,the-verge");
     }
 
     @Override
