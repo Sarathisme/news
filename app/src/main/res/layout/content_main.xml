@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".NewsActivity"
+    android:orientation="vertical"
+    tools:showIn="@layout/app_bar_main">
+
+
+    <LinearLayout
+        android:id="@+id/mainPageLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/categories"/>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="4dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/businessButton"
+                android:text="@string/business"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:textColor="@color/white"
+                android:onClick="onClickButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/entertainmentButton"
+                android:text="@string/entertainment"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/white"
+                android:onClick="onClickButton"
+                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/healthButton"
+                android:text="@string/health"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:textColor="@color/white"
+                android:onClick="onClickButton"
+                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="9dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/hinduButton"
+                android:text="@string/hindu"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="@android:color/holo_purple"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:onClick="onClickButton"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/toiButton"
+                android:text="@string/toi"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:onClick="onClickButton"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
+
+            <ImageButton
+                android:id="@+id/more"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openNavigationMenu"
+                android:contentDescription="@string/news_article_image" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/featured"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/featured"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>

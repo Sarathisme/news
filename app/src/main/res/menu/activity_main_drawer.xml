@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/general">
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/ic_home_black_24dp"
+                android:title="@string/home" />
+
+            <item
+                android:id="@+id/saved"
+                android:icon="@drawable/ic_bookmark_black_24dp"
+                android:title="@string/saved" />
+        </menu>
+    </item>
+
+    <item android:title="@string/news_papers">
+        <menu>
+            <item
+                android:id="@+id/hinduMenu"
+                android:icon="@drawable/ic_newspaper"
+                android:title="@string/hindu" />
+
+            <item
+                android:id="@+id/toiMenu"
+                android:icon="@drawable/ic_newspaper"
+                android:title="@string/toi" />
+
+            <item
+                android:id="@+id/googleMenu"
+                android:icon="@drawable/ic_newspaper"
+                android:title="@string/google_news" />
+        </menu>
+    </item>
+
+    <item android:title="@string/categories">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_business"
+                    android:icon="@drawable/ic_business_black_24dp"
+                    android:title="@string/business" />
+                <item
+                    android:id="@+id/nav_entertainment"
+                    android:icon="@drawable/ic_ondemand_video_black_24dp"
+                    android:title="@string/entertainment" />
+                <item
+                    android:id="@+id/nav_health"
+                    android:icon="@drawable/ic_noun_lifeline__386761"
+                    android:title="@string/health" />
+                <item
+                    android:id="@+id/nav_science"
+                    android:icon="@drawable/ic_noun_science"
+                    android:title="@string/science" />
+                <item
+                    android:id="@+id/nav_sports"
+                    android:icon="@drawable/ic_noun_sports"
+                    android:title="@string/sports"/>
+                <item
+                    android:id="@+id/nav_technology"
+                    android:icon="@drawable/ic_desktop_mac_black_24dp"
+                    android:title="@string/technology"/>
+
+            </group>
+        </menu>
+    </item>
+
+</menu>
