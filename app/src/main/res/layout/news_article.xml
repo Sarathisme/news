@@ -90,6 +90,8 @@
                 android:paddingEnd="4dp"
                 android:paddingBottom="8dp"
                 android:paddingTop="12dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_menu_share"

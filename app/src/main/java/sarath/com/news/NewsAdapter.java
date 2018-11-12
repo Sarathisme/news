@@ -2,11 +2,13 @@ package sarath.com.news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +25,20 @@ import java.util.ArrayList;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.GeneralViewHolder>{
 
-    private ShareActionProvider shareActionProvider;
     private ArrayList<News> news;
     private Context context;
+    private NewsDatabase database;
+    private boolean isSaved = false;
 
-     NewsAdapter(ArrayList<News> news, Context context){
+    NewsAdapter(ArrayList<News> news, Context context){
         this.news = news;
         this.context = context;
+    }
+
+    NewsAdapter(ArrayList<News> news, Context context, boolean isSaved){
+        this.news = news;
+        this.context = context;
+        this.isSaved = isSaved;
     }
 
     static class GeneralViewHolder extends RecyclerView.ViewHolder {
@@ -39,9 +48,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.GeneralViewHol
         private Button read;
         private ImageButton download, share;
         private String url;
+        private int uid;
 
          GeneralViewHolder(@NonNull View itemView) {
             super(itemView);
+
             headlines = itemView.findViewById(R.id.titleTextView);
             description = itemView.findViewById(R.id.descriptionTextView);
             read = itemView.findViewById(R.id.read);
@@ -72,16 +83,75 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.GeneralViewHol
 
         //TODO: Cache the data
         if(news.get(i).getUrlToImage() != null && !news.get(i).getUrlToImage().equals("")) {
-            Picasso.get().load(news.get(i).getUrlToImage()).into(generalViewHolder.image);
+            Picasso.get().load(news.get(i).getUrlToImage()).placeholder(R.drawable.good).into(generalViewHolder.image);
         }
 
         //TODO: Check the download option
-        generalViewHolder.download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if(isSaved){
+            generalViewHolder.download.setImageResource(R.drawable.ic_delete_black_24dp);
+            generalViewHolder.download.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    database = NewsDatabase.getNewsDatabase(context);
+                    final NewsActivity activity = (NewsActivity) context;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                database.newsDao().deleteNews(news.get(i));
+                                news.remove(i);
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, "Item Removed Successfully!", Toast.LENGTH_SHORT).show();
+                                        notifyItemRemoved(i);
+                                        notifyDataSetChanged();
+                                    }
+                                });
+                            }catch (Exception e){
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        generalViewHolder.download.setImageResource(R.drawable.ic_file_download_black_24dp);
+                                        Toast.makeText(context, "Something's wrong!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
+                }
+            });
+        }else {
+            generalViewHolder.download.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    database = NewsDatabase.getNewsDatabase(context);
+                    final NewsActivity activity = (NewsActivity) context;
 
-            }
-        });
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                database.newsDao().insertNews(news.get(i));
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        generalViewHolder.download.setImageResource(R.drawable.ic_cloud_done_black_24dp);
+                                    }
+                                });
+                            } catch (SQLiteConstraintException e) {
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, "Already added!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
+                }
+            });
+        }
 
         generalViewHolder.read.setOnClickListener(new View.OnClickListener() {
             @Override

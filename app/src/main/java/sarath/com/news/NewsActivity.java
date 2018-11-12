@@ -83,6 +83,7 @@ public class NewsActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.home:
+                mainPage.setVisibility(View.VISIBLE);
                 initFragment(true);
                 break;
             case R.id.nav_business:
@@ -112,11 +113,23 @@ public class NewsActivity extends AppCompatActivity
             case R.id.googleMenu:
                 initFragment("none", "google-news-in");
                 break;
+            case R.id.saved:
+                openSavedFragment();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openSavedFragment(){
+        mainPage.setVisibility(View.GONE);
+
+        Fragment fragment = new NewsSavedFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_content, fragment);
+        ft.commit();
     }
 
     public void initFragment(boolean homepage){

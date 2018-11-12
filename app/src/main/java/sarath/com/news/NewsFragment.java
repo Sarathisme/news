@@ -33,7 +33,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private Context context;
     private ProgressBar progressBar;
 
-
     private final String URL = "https://newsapi.org/";
     private String path2 = "top-headlines";
     private String path1 = "v2";

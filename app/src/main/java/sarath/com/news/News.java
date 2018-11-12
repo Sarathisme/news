@@ -1,9 +1,53 @@
 package sarath.com.news;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(indices = {@Index(value = {"headlines"}, unique = true)})
 class News {
-    private String headlines, author, description, publishedAt, url, urlToImage;
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
+    @ColumnInfo(name = "headlines")
+    private String headlines;
+
+    @ColumnInfo(name = "author")
+    private String author;
+
+    @ColumnInfo(name = "description")
+    private String description;
+
+    @ColumnInfo(name = "publishedAt")
+    private String publishedAt;
+
+    @ColumnInfo(name = "url")
+    private String url;
+
+    @ColumnInfo(name = "urlToImage")
+    private String urlToImage;
+
+    @ColumnInfo(name = "hasData")
     private boolean hasData = true;
 
+    @NonNull
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(@NonNull int uid) {
+        this.uid = uid;
+    }
+
+    public News(){
+
+    }
+
+    @Ignore
     public News(String headlines, String author, String description, String publishedAt, String url, String urlToImage) {
         this.headlines = headlines;
         this.author = author;
@@ -13,6 +57,7 @@ class News {
         this.urlToImage = urlToImage;
     }
 
+    @Ignore
     public News(boolean hasData){
         this.hasData = hasData;
     }

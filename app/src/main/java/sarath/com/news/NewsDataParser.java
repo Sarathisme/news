@@ -27,7 +27,10 @@ class NewsDataParser {
 
                 String headlines = temp.getString("title");
                 String author = temp.getString("author");
+
                 String description = temp.getString("description");
+                if(description == null || description.equals("null"))description = "";
+
                 String url = temp.getString("url");
                 String urlToImage = temp.getString("urlToImage");
                 String publishedAt = temp.getString("publishedAt");
