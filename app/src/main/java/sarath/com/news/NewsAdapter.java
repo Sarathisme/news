@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.RecyclerView;
@@ -156,15 +157,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.GeneralViewHol
         generalViewHolder.read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(generalViewHolder.url != null && !generalViewHolder.url.equals("")){
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(generalViewHolder.url));
-                    context.startActivity(i);
-                }
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("news", news.get(i));
+                Intent i = new Intent(context, NewsArticleActivity.class);
+                i.putExtras(bundle);
+                context.startActivity(i);
             }
         });
 
-        //TODO: Check the share option
         generalViewHolder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

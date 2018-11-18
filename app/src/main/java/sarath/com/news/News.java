@@ -7,8 +7,10 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 @Entity(indices = {@Index(value = {"headlines"}, unique = true)})
-class News {
+class News implements Serializable {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     private int uid;
@@ -27,6 +29,17 @@ class News {
 
     @ColumnInfo(name = "url")
     private String url;
+
+    @ColumnInfo(name = "content")
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     @ColumnInfo(name = "urlToImage")
     private String urlToImage;
@@ -48,13 +61,14 @@ class News {
     }
 
     @Ignore
-    public News(String headlines, String author, String description, String publishedAt, String url, String urlToImage) {
+    public News(String headlines, String author, String description, String publishedAt, String url, String urlToImage, String content) {
         this.headlines = headlines;
         this.author = author;
         this.description = description;
         this.publishedAt = publishedAt;
         this.url = url;
         this.urlToImage = urlToImage;
+        this.content = content;
     }
 
     @Ignore

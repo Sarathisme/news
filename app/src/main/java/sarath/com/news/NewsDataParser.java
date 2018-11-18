@@ -31,6 +31,9 @@ class NewsDataParser {
                 String description = temp.getString("description");
                 if(description == null || description.equals("null"))description = "";
 
+                String content = temp.getString("content");
+                if(content == null || content.equals("null"))content = description;
+
                 String url = temp.getString("url");
                 String urlToImage = temp.getString("urlToImage");
                 String publishedAt = temp.getString("publishedAt");
@@ -39,9 +42,13 @@ class NewsDataParser {
                 String[] dateAndTime = publishedAt.split("T");
                 publishedAt = dateAndTime[0] + ", " + dateAndTime[1];
 
-                author += ", " + source.getString("name");
+                if(author != null) {
+                    author += ", " + source.getString("name");
+                }else{
+                    author = source.getString("name");
+                }
 
-                news.add(new News(headlines, author, description, publishedAt, url, urlToImage));
+                news.add(new News(headlines, author, description, publishedAt, url, urlToImage, content));
             }
 
         }catch (JSONException e){

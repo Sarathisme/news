@@ -9,7 +9,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-@Database(entities = {News.class}, version = 4)
+@Database(entities = {News.class}, version = 5)
 public abstract class NewsDatabase extends RoomDatabase {
 
     private static NewsDatabase INSTANCE;
